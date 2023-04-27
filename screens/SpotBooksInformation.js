@@ -14,7 +14,7 @@ export default function SpotBooksInformation({ route, navigation }) {
 	const { qrData } = route.params;
 	// alert(qrSpotData);
 	const urlLocalTunnel =
-		"https://afraid-hounds-relate-90-112-199-68.loca.lt";
+		"https://small-facts-drive-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
@@ -52,17 +52,7 @@ export default function SpotBooksInformation({ route, navigation }) {
 				Hi From SpotBooks N° : {spotBooks.id} {"\n"}
 				Adress :{spotBooks.street} ,{spotBooks.zipcode}
 			</Text>
-			<View>
-				{/* <Button
-					label={"Déposer livre"}
-					onPress={() =>
-						navigation.navigate(ScanCard, {
-							typeAction: "BookInformation",
-							spotBooksInformation: spotBooks,
-						})
-					}
-				/> */}
-			</View>
+			<View></View>
 			<Button
 				label={"scan book"}
 				onPress={() =>
