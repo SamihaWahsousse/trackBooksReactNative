@@ -8,13 +8,13 @@ import ScanCard from "../components/ScanCard";
 // import { TextInput } from "react-native";
 
 export default function SpotBooksInformation({ route, navigation }) {
-	const user = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 	const [spotBooks, setSpotBooks] = useState([]);
 	//const { typeAction } = route.params.typeAction;
 	const { qrData } = route.params;
 	// alert(qrSpotData);
 	const urlLocalTunnel =
-		"https://small-facts-drive-90-112-199-68.loca.lt";
+		"https://ten-meals-stare-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
@@ -37,8 +37,8 @@ export default function SpotBooksInformation({ route, navigation }) {
 	return (
 		<View>
 			<Text>Page SpotBooks</Text>
-			{user.isLoged ? (
-				<Text>Welcome {user.dataUser.name}</Text>
+			{user ? (
+				<Text>Welcome {user.name}</Text>
 			) : (
 				<Text>Veuillez vous connecter</Text>
 			)}

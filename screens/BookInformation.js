@@ -11,7 +11,7 @@ import { AuthContext } from "../AuthContext";
 import ModalActionBook from "../components/ModalActionBook";
 
 export default function BookInformation({ route }) {
-	const user = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 	// const { userInformation } = route.params;
 	const { spotBooksInformation } = route.params;
 	const [book, setbook] = useState([]);
@@ -25,7 +25,7 @@ export default function BookInformation({ route }) {
 	};
 
 	const urlLocalTunnel =
-		"https://small-facts-drive-90-112-199-68.loca.lt";
+		"https://ten-meals-stare-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
 	//alert(JSON.stringify(qrData));
@@ -55,7 +55,7 @@ export default function BookInformation({ route }) {
 
 	return (
 		<View>
-			<Text>welcome {user.dataUser.name}</Text>
+			<Text>welcome {user.name}</Text>
 			<Text>spotBooks N°:{spotBooksInformation.id}</Text>
 			<Text>Vous avez scanné le livre :{book.title}</Text>
 			<View>

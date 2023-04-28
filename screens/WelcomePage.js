@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import ScanCard from "../components/ScanCard";
 
 export default function WelcomePage({ route, navigation }) {
-	const user = useContext(AuthContext);
+	const { user, setUser } = useContext(AuthContext);
 	// console.log(user);
 	// const [comp, setComponent] = useState(false);
 
@@ -17,12 +17,12 @@ export default function WelcomePage({ route, navigation }) {
 	const { qrData } = route.params;
 	// console.log(qrData);
 	const urlLocalTunnel =
-		"https://small-facts-drive-90-112-199-68.loca.lt";
+		"https://ten-meals-stare-90-112-199-68.loca.lt";
 
 	const getProfil = async () => {
 		try {
 			const response = await fetch(
-				"https://small-facts-drive-90-112-199-68.loca.lt/api/v1/users/login",
+				"https://ten-meals-stare-90-112-199-68.loca.lt/api/v1/users/login",
 				{
 					method: "POST",
 					headers: {
@@ -36,9 +36,10 @@ export default function WelcomePage({ route, navigation }) {
 			);
 			const data = await response.json();
 			// if(response)
-			user.dataUser = data;
-			user.isLoged = true;
-			console.log(user.dataUser.name);
+			// user.dataUser = data;
+			// user.isLoged = true;
+			setUser(data);
+			console.log(user);
 		} catch (error) {
 			console.error(error);
 		}
@@ -51,8 +52,8 @@ export default function WelcomePage({ route, navigation }) {
 		<View style={{ flex: 1 }}>
 			{/* {comp ? <ScanCard /> : null} */}
 			<Text>Page Profil</Text>
-			{user.isLoged ? (
-				<Text>Welcome {user.dataUser.name}</Text>
+			{user ? (
+				<Text>Welcome {user.name}</Text>
 			) : (
 				<Text>Veuillez vous connecter</Text>
 			)}
