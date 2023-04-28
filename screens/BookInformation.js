@@ -12,23 +12,28 @@ import ModalActionBook from "../components/ModalActionBook";
 
 export default function BookInformation({ route }) {
 	const { user } = useContext(AuthContext);
-	// const { userInformation } = route.params;
 	const { spotBooksInformation } = route.params;
 	const [book, setbook] = useState([]);
 	const { qrData } = route.params;
 
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [chooseData, setchooseData] = useState();
+	// const [isBorrowed, setBorrowed] = useState([]);
+	const [message, setMessage] = useState("");
 
 	const changeModalVisible = (bool) => {
 		setModalVisible(bool);
+		// returnBorrowed = isBorrowed.Message;
 	};
+
+	// const handelMessage = () => {
+	// 	setMessage("Hello,world");
+	// };
 
 	const urlLocalTunnel =
 		"https://ten-meals-stare-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
-	//alert(JSON.stringify(qrData));
 
 	const getBook = async () => {
 		try {
@@ -36,10 +41,6 @@ export default function BookInformation({ route }) {
 			const data = await response.json();
 			// alert(JSON.stringify(data));
 			setbook(data);
-			// if(response)
-			// user.dataUser = data;
-			// user.isLoged = true;
-			// console.log(user.dataUser.name);
 		} catch (error) {
 			console.error(error);
 		}
@@ -53,6 +54,39 @@ export default function BookInformation({ route }) {
 		setchooseData(data);
 	};
 
+	//add borrow book function
+	const borrowBook = async () => {
+		try {
+			const response = await fetch(
+				"https://ten-meals-stare-90-112-199-68.loca.lt/api/v1/books/" +
+					book.id +
+					"/borrowBook",
+				{
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						id: user.id,
+					}),
+				}
+			);
+			const borrowData = await response.json();
+			console.log(borrowData);
+			// setBorrowed(borrowData);
+			setMessage(borrowData.Message);
+			changeModalVisible(true);
+			// console.log(isBorrowed);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	// useEffect(() => {
+	// 	borrowBook();
+	// }, [isBorrowed]);
+
 	return (
 		<View>
 			<Text>welcome {user.name}</Text>
@@ -65,7 +99,7 @@ export default function BookInformation({ route }) {
 			<TouchableOpacity
 				style={styles.buttonModal}
 				onPress={() => {
-					changeModalVisible(true);
+					borrowBook();
 				}}
 			>
 				<Text style={styles.text}>Déposer livre</Text>
@@ -76,10 +110,11 @@ export default function BookInformation({ route }) {
 				visible={isModalVisible}
 				nRequestClose={() => changeModalVisible(false)}
 			>
-				<ModalActionBook
+				<Text>{message}</Text>
+				{/* <ModalActionBook
 					changeModalVisible={changeModalVisible}
 					setData={setData}
-				/>
+				/> */}
 			</Modal>
 		</View>
 	);

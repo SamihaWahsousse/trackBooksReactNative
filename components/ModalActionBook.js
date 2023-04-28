@@ -17,12 +17,13 @@ const WIDTH = Dimensions.get("window").width;
 const HEIGHT_MODAL = 150;
 
 const ModalActionBook = (props) => {
-	// const [dataModal, setDataModal] = useState(false);
 	closeModal = (bool, data) => {
 		props.changeModalVisible(bool);
 		props.setData(data);
 	};
 
+	// const testModalConent = this.props.test;
+	const [message, setMessage] = useState();
 	return (
 		<TouchableOpacity disabled={true} style={styles.container}>
 			<View style={styles.modal}>
@@ -30,7 +31,7 @@ const ModalActionBook = (props) => {
 					<Text style={[styles.text, { fontSize: 20 }]}>
 						Book: title
 					</Text>
-					<Text style={styles.text}>Sample modal description</Text>
+					<Text style={styles.text}>{message}</Text>
 				</View>
 
 				<View style={styles.buttonView}>
