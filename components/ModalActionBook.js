@@ -23,15 +23,15 @@ const ModalActionBook = (props) => {
 	};
 
 	// const testModalConent = this.props.test;
-	const [message, setMessage] = useState();
+	// const [message, setMessage] = useState();
 	return (
 		<TouchableOpacity disabled={true} style={styles.container}>
 			<View style={styles.modal}>
 				<View style={styles.textView}>
 					<Text style={[styles.text, { fontSize: 20 }]}>
-						Book: title
+						{props.test}
 					</Text>
-					<Text style={styles.text}>{message}</Text>
+					<Text style={styles.text}>{props.test}</Text>
 				</View>
 
 				<View style={styles.buttonView}>

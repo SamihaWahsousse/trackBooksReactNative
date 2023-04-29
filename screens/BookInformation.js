@@ -74,10 +74,8 @@ export default function BookInformation({ route }) {
 			);
 			const borrowData = await response.json();
 			console.log(borrowData);
-			// setBorrowed(borrowData);
 			setMessage(borrowData.Message);
 			changeModalVisible(true);
-			// console.log(isBorrowed);
 		} catch (error) {
 			console.error(error);
 		}
@@ -102,7 +100,7 @@ export default function BookInformation({ route }) {
 					borrowBook();
 				}}
 			>
-				<Text style={styles.text}>Déposer livre</Text>
+				<Text style={styles.text}>Emprunter livre</Text>
 			</TouchableOpacity>
 			<Modal
 				transparent={true}
@@ -110,11 +108,12 @@ export default function BookInformation({ route }) {
 				visible={isModalVisible}
 				nRequestClose={() => changeModalVisible(false)}
 			>
-				<Text>{message}</Text>
-				{/* <ModalActionBook
+				{/* <Text>{message}</Text> */}
+				<ModalActionBook
 					changeModalVisible={changeModalVisible}
 					setData={setData}
-				/> */}
+					test={message}
+				/>
 			</Modal>
 		</View>
 	);

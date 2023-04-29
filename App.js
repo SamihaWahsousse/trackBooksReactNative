@@ -15,6 +15,7 @@ import ScanSpotBooks from "./screens/ScanSpotBooks";
 import SpotBooksInformation from "./screens/SpotBooksInformation";
 import BookInformation from "./screens/BookInformation";
 import { AuthContext } from "./AuthContext";
+import Map from "./screens/Map";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
 							name="BookInformation"
 							component={BookInformation}
 						/>
+						<Stack.Screen name="Map" component={Map} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</TailwindProvider>

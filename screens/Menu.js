@@ -39,8 +39,8 @@ const Menu = () => {
 						}
 					/>
 					<Button
-						label={"afficher tous les livres"}
-						onPress={() => navigation.navigate("ListBooks")}
+						label={"Spots près de chez vous"}
+						onPress={() => navigation.navigate("Map")}
 					/>
 					<Button label={"Test Buttun"} onPress={testAuthen} />
 				</View>
