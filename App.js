@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import Menu from "./screens/Menu.js";
 import ScanCard from "./components/ScanCard";
-import Books from "./screens/Books";
+import BorrowReturnAction from "./screens/BorrowReturnAction";
 import ListBooks from "./screens/ListBooks";
 import WelcomePage from "./screens/WelcomePage";
 import { useState } from "react";
@@ -28,7 +28,10 @@ export default function App() {
 						<Stack.Screen name="Home" component={HomeScreen} />
 						<Stack.Screen name="Menu" component={Menu} />
 						<Stack.Screen name="ScanCard" component={ScanCard} />
-						<Stack.Screen name="Books" component={Books} />
+						<Stack.Screen
+							name="BorrowReturnAction"
+							component={BorrowReturnAction}
+						/>
 						<Stack.Screen name="ListBooks" component={ListBooks} />
 						<Stack.Screen
 							name="WelcomePage"

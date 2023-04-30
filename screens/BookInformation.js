@@ -13,6 +13,9 @@ import ModalActionBook from "../components/ModalActionBook";
 export default function BookInformation({ route }) {
 	const { user } = useContext(AuthContext);
 	const { spotBooksInformation } = route.params;
+	const { userChoice } = route.params;
+	//alert(userChoice);
+
 	const [book, setbook] = useState([]);
 	const { qrData } = route.params;
 
@@ -23,24 +26,31 @@ export default function BookInformation({ route }) {
 
 	const changeModalVisible = (bool) => {
 		setModalVisible(bool);
-		// returnBorrowed = isBorrowed.Message;
 	};
-
-	// const handelMessage = () => {
-	// 	setMessage("Hello,world");
-	// };
 
 	const urlLocalTunnel =
 		"https://true-planets-fail-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
-
+	//get Book information
 	const getBook = async () => {
 		try {
 			const response = await fetch(urlApi);
 			const data = await response.json();
-			// alert(JSON.stringify(data));
 			setbook(data);
+			if (data) {
+				userChoice === "buttonBorrow"
+					? borrowBook(data)
+					: userChoice === "buttonReturn"
+					? returnBook(data)
+					: null;
+			}
+
+			// userChoice === "buttonBorrow"
+			// 	? await borrowBook()
+			// 	: userChoice === "buttonReturn"
+			// 	? await returnBook()
+			// 	: null;
 		} catch (error) {
 			console.error(error);
 		}
@@ -50,16 +60,24 @@ export default function BookInformation({ route }) {
 		getBook();
 	}, []);
 
+	/*
+	userChoice == "buttonBorrow"
+		? borrowBook()
+		: userChoice == "buttonReturn"
+		? returnBook()
+		: null; */
+
 	const setData = (data) => {
 		setchooseData(data);
 	};
 
-	//add borrow book function
-	const borrowBook = async () => {
+	//Borrow Book function
+	async function borrowBook(updatedBook) {
 		try {
 			const response = await fetch(
-				"https://five-mugs-type-90-112-199-68.loca.lt/api/v1/books/" +
-					book.id +
+				urlLocalTunnel +
+					"/api/v1/books/" +
+					updatedBook.id +
 					"/borrowBook",
 				{
 					method: "POST",
@@ -72,43 +90,57 @@ export default function BookInformation({ route }) {
 					}),
 				}
 			);
+
 			const borrowData = await response.json();
-			console.log(borrowData);
+			// console.log(borrowData);
 			setMessage(borrowData.Message);
 			changeModalVisible(true);
 		} catch (error) {
 			console.error(error);
 		}
-	};
+	}
 
 	// useEffect(() => {
 	// 	borrowBook();
 	// }, [isBorrowed]);
 
+	//return book function
+
+	async function returnBook(updatedBook) {
+		try {
+			const response = await fetch(
+				urlLocalTunnel +
+					"/api/v1/books/" +
+					updatedBook.id +
+					"/return",
+				{
+					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						id: user.id,
+					}),
+				}
+			);
+			const returnData = await response.json();
+			console.log(returnData.Message);
+			setMessage(returnData.Message);
+			changeModalVisible(true);
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
 	return (
 		<View>
-			<Text>welcome {user.name}</Text>
-			<Text>spotBooks N°:{spotBooksInformation.id}</Text>
-			<Text>Vous avez scanné le livre :{book.title}</Text>
-			<View>
-				<Text> Que voulez vous faire ? </Text>
-			</View>
-
-			<TouchableOpacity
-				style={styles.buttonModal}
-				onPress={() => {
-					borrowBook();
-				}}
-			>
-				<Text style={styles.text}>Emprunter livre</Text>
-			</TouchableOpacity>
 			<Modal
 				transparent={true}
 				animationStyle="slide"
 				visible={isModalVisible}
 				nRequestClose={() => changeModalVisible(false)}
 			>
-				{/* <Text>{message}</Text> */}
 				<ModalActionBook
 					changeModalVisible={changeModalVisible}
 					setData={setData}
@@ -116,6 +148,60 @@ export default function BookInformation({ route }) {
 				/>
 			</Modal>
 		</View>
+
+		// <View>
+		// 	<Text>welcome {user.name}</Text>
+		// 	<Text>spotBooks N°:{spotBooksInformation.id}</Text>
+		// 	<Text>Vous avez scanné le livre :{book.title}</Text>
+		// 	<View>
+		// 		<Text> Que voulez vous faire ? </Text>
+		// 	</View>
+		// 	<TouchableOpacity
+		// 		style={styles.buttonModal}
+		// 		onPress={() => {
+		// 			borrowBook();
+		// 		}}
+		// 	>
+		// 		<Text style={styles.text}>Emprunter livre</Text>
+		// 	</TouchableOpacity>
+		// {/* userChoice === "buttonBorrow"
+		// 	? borrowBook()
+		// 	: userChoice === "buttonReturn"
+		// 	? returnBook()
+		// 	: null */}
+
+		// 	{/* <TouchableOpacity
+		// 		style={styles.buttonModal}
+		// 		onPress={() => {
+		// 			borrowBook();
+		// 		}}
+		// 	>
+		// 		<Text style={styles.text}>Emprunter livre</Text>
+		// 	</TouchableOpacity>
+
+		// 	<TouchableOpacity
+		// 		style={styles.buttonModal}
+		// 		onPress={() => {
+		// 			returnBook();
+		// 		}}
+		// 	>
+		// 		<Text style={styles.text}>Déposer livre</Text>
+		// 	</TouchableOpacity> */}
+
+		// <Modal
+		// 	transparent={true}
+		// 	animationStyle="slide"
+		// 	visible={isModalVisible}
+		// 	nRequestClose={() => changeModalVisible(false)}
+		// >
+		// 	{/* <Text>{message}</Text> */}
+		// 	<ModalActionBook
+		// 		changeModalVisible={changeModalVisible}
+		// 		setData={setData}
+		// 		test={message}
+		// 	/>
+		// </Modal>
+		// </View>
 	);
 }
 

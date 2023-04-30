@@ -14,6 +14,8 @@ export default function ScanCard({ navigation, route }) {
 
 	const { typeAction } = route.params;
 	const { spotBooksInformation } = route.params;
+	const { userChoice } = route.params;
+	//alert("userChoice " + userChoice);
 
 	// const { typeAction } = params != .typeAction;
 
@@ -45,6 +47,7 @@ export default function ScanCard({ navigation, route }) {
 		navigation.navigate(typeAction, {
 			qrData: data,
 			spotBooksInformation: spotBooksInformation,
+			userChoice: userChoice,
 		});
 	};
 

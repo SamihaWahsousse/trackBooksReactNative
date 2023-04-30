@@ -5,8 +5,6 @@ import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import ScanCard from "../components/ScanCard";
 
-// import { TextInput } from "react-native";
-
 export default function SpotBooksInformation({ route, navigation }) {
 	const { user } = useContext(AuthContext);
 	const [spotBooks, setSpotBooks] = useState([]);
@@ -14,7 +12,7 @@ export default function SpotBooksInformation({ route, navigation }) {
 	const { qrData } = route.params;
 	// alert(qrSpotData);
 	const urlLocalTunnel =
-		"https://true-planets-fail-90-112-199-68.loca.ltt";
+		"https://true-planets-fail-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
@@ -52,8 +50,9 @@ export default function SpotBooksInformation({ route, navigation }) {
 				Hi From SpotBooks N° : {spotBooks.id} {"\n"}
 				Adress :{spotBooks.street} ,{spotBooks.zipcode}
 			</Text>
-			<View></View>
-			<Button
+			<Text>Choisir une action:</Text>
+
+			{/* <Button
 				label={"scan book"}
 				onPress={() =>
 					navigation.navigate("ScanCard", {
@@ -61,7 +60,29 @@ export default function SpotBooksInformation({ route, navigation }) {
 						spotBooksInformation: spotBooks,
 					})
 				}
+			/> */}
+
+			<Button
+				label={"Emprunter Livre"}
+				onPress={() =>
+					navigation.navigate("ScanCard", {
+						typeAction: "BookInformation",
+						spotBooksInformation: spotBooks,
+						userChoice: "buttonBorrow",
+					})
+				}
 			/>
+			<Button
+				label={"Déposer Livre"}
+				onPress={() =>
+					navigation.navigate("ScanCard", {
+						typeAction: "BookInformation",
+						spotBooksInformation: spotBooks,
+						userChoice: "buttonReturn",
+					})
+				}
+			/>
+
 			<Button label="Go back" onPress={() => navigation.goBack()} />
 		</View>
 	);
