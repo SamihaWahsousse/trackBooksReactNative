@@ -17,12 +17,12 @@ export default function WelcomePage({ route, navigation }) {
 	const { qrData } = route.params;
 	// console.log(qrData);
 	const urlLocalTunnel =
-		"https://ten-meals-stare-90-112-199-68.loca.lt";
+		"https://true-planets-fail-90-112-199-68.loca.lt";
 
 	const getProfil = async () => {
 		try {
 			const response = await fetch(
-				"https://ten-meals-stare-90-112-199-68.loca.lt/api/v1/users/login",
+				urlLocalTunnel + "/api/v1/users/login",
 				{
 					method: "POST",
 					headers: {

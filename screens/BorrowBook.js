@@ -9,7 +9,7 @@ export default function BorrowBook({ route }) {
 	const qrData = route.param;
 
 	const urlLocalTunnel =
-		"https://ten-meals-stare-90-112-199-68.loca.lt";
+		"https://true-planets-fail-90-112-199-68.loca.lt";
 
 	const urlApi =
 		urlLocalTunnel + "/api/v1/books/" + qrData + "/borrowBook";

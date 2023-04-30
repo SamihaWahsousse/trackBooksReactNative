@@ -14,7 +14,7 @@ export default function SpotBooksInformation({ route, navigation }) {
 	const { qrData } = route.params;
 	// alert(qrSpotData);
 	const urlLocalTunnel =
-		"https://ten-meals-stare-90-112-199-68.loca.lt";
+		"https://true-planets-fail-90-112-199-68.loca.ltt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
