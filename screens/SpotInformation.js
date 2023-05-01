@@ -3,16 +3,15 @@ import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import Button from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
-import ScanCard from "../components/ScanCard";
+import ScanQRCode from "../components/ScanQRCode";
 
-export default function SpotBooksInformation({ route, navigation }) {
+export default function SpotInformation({ route, navigation }) {
 	const { user } = useContext(AuthContext);
 	const [spotBooks, setSpotBooks] = useState([]);
-	//const { typeAction } = route.params.typeAction;
 	const { qrData } = route.params;
-	// alert(qrSpotData);
+
 	const urlLocalTunnel =
-		"https://true-planets-fail-90-112-199-68.loca.lt";
+		"https://new-streets-sleep-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
@@ -22,7 +21,6 @@ export default function SpotBooksInformation({ route, navigation }) {
 			const response = await fetch(urlApi);
 			const json = await response.json();
 			setSpotBooks(json);
-			// console.log(spotBooks.city);
 		} catch (error) {
 			console.error(error);
 		}
@@ -52,22 +50,12 @@ export default function SpotBooksInformation({ route, navigation }) {
 			</Text>
 			<Text>Choisir une action:</Text>
 
-			{/* <Button
-				label={"scan book"}
-				onPress={() =>
-					navigation.navigate("ScanCard", {
-						typeAction: "BookInformation",
-						spotBooksInformation: spotBooks,
-					})
-				}
-			/> */}
-
 			<Button
 				label={"Emprunter Livre"}
 				onPress={() =>
-					navigation.navigate("ScanCard", {
+					navigation.navigate("ScanQRCode", {
 						typeAction: "BookInformation",
-						spotBooksInformation: spotBooks,
+						SpotInformation: spotBooks,
 						userChoice: "buttonBorrow",
 					})
 				}
@@ -75,9 +63,9 @@ export default function SpotBooksInformation({ route, navigation }) {
 			<Button
 				label={"Déposer Livre"}
 				onPress={() =>
-					navigation.navigate("ScanCard", {
+					navigation.navigate("ScanQRCode", {
 						typeAction: "BookInformation",
-						spotBooksInformation: spotBooks,
+						SpotInformation: spotBooks,
 						userChoice: "buttonReturn",
 					})
 				}

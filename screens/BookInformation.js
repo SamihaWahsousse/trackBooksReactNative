@@ -7,21 +7,18 @@ import {
 } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
-// import Button from "../components/Button";
 import ModalActionBook from "../components/ModalActionBook";
 
 export default function BookInformation({ route }) {
 	const { user } = useContext(AuthContext);
-	const { spotBooksInformation } = route.params;
+	const { SpotInformation } = route.params;
 	const { userChoice } = route.params;
-	//alert(userChoice);
 
 	const [book, setbook] = useState([]);
 	const { qrData } = route.params;
 
 	const [isModalVisible, setModalVisible] = useState(false);
 	const [chooseData, setchooseData] = useState();
-	// const [isBorrowed, setBorrowed] = useState([]);
 	const [message, setMessage] = useState("");
 
 	const changeModalVisible = (bool) => {
@@ -29,10 +26,11 @@ export default function BookInformation({ route }) {
 	};
 
 	const urlLocalTunnel =
-		"https://true-planets-fail-90-112-199-68.loca.lt";
+		"https://new-streets-sleep-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
-	//get Book information
+
+	//get Book function
 	const getBook = async () => {
 		try {
 			const response = await fetch(urlApi);
@@ -45,12 +43,6 @@ export default function BookInformation({ route }) {
 					? returnBook(data)
 					: null;
 			}
-
-			// userChoice === "buttonBorrow"
-			// 	? await borrowBook()
-			// 	: userChoice === "buttonReturn"
-			// 	? await returnBook()
-			// 	: null;
 		} catch (error) {
 			console.error(error);
 		}
@@ -59,13 +51,6 @@ export default function BookInformation({ route }) {
 	useEffect(() => {
 		getBook();
 	}, []);
-
-	/*
-	userChoice == "buttonBorrow"
-		? borrowBook()
-		: userChoice == "buttonReturn"
-		? returnBook()
-		: null; */
 
 	const setData = (data) => {
 		setchooseData(data);
@@ -100,12 +85,7 @@ export default function BookInformation({ route }) {
 		}
 	}
 
-	// useEffect(() => {
-	// 	borrowBook();
-	// }, [isBorrowed]);
-
 	//return book function
-
 	async function returnBook(updatedBook) {
 		try {
 			const response = await fetch(
@@ -151,7 +131,7 @@ export default function BookInformation({ route }) {
 
 		// <View>
 		// 	<Text>welcome {user.name}</Text>
-		// 	<Text>spotBooks N°:{spotBooksInformation.id}</Text>
+		// 	<Text>spotBooks N°:{SpotInformation.id}</Text>
 		// 	<Text>Vous avez scanné le livre :{book.title}</Text>
 		// 	<View>
 		// 		<Text> Que voulez vous faire ? </Text>

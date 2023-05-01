@@ -1,46 +1,59 @@
-import {
-	View,
-	Text,
-	SafeAreaView,
-	StyleSheet,
-	Image,
-} from "react-native";
-import React, { useLayoutEffect, useContext } from "react";
-
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import React, {
+	useLayoutEffect,
+	useState,
+	useEffect,
+	useContext,
+} from "react";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../components/Button";
-import { AuthContext } from "../AuthContext";
 
-const PlaceholderImage = require("../assets/images/bgImage.png");
-
-const HomeScreen = ({ navigation }) => {
-	const { user } = useContext(AuthContext);
-
-	const navigation1 = useNavigation();
+const HomeScreen = () => {
+	const navigation = useNavigation();
 	useLayoutEffect(() => {
-		navigation1.setOptions({
+		navigation.setOptions({
 			headerShown: false,
 		});
 	}, []);
+
 	return (
-		<SafeAreaView
-			style={styles.ViewContainer}
-			className=" items-center justify-center w-200 h-200 bg-slate-500"
-		>
-			{/* First section*/}
-			{/* <Text className="font-bold text-lg text-center text-[#E6C89D] mt-2">
-					Welcome to TrackBook application
-				</Text> */}
-			{/* Image Container section*/}
+		// <SafeAreaView>
 
-			<Image source={PlaceholderImage} className="w-80 h-80" />
-			<Text>welcome </Text>
+		/* <View>
+				<Text className="font-bold text-lg text-center text-[#E6C89D]">
+					Authentication
+				</Text>
 
-			<View style={styles.ViewButton}>
-				{/* Second section*/}
+				<View className="bg-[#878C5C] w-80 h-80 ">
+					<Button
+						label={"S'authentifier"}
+						onPress={() =>
+							navigation.navigate("ScanQRCode", {
+								typeAction: "Profile",
+							})
+						}
+					/>
+					<Button
+						label={"Spots près de chez vous"}
+						onPress={() => navigation.navigate("Map")}
+					/>
+				</View>
+			</View> */
+
+		// </SafeAreaView>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.viewButton}>
 				<Button
-					label={"Get Started"}
-					onPress={() => navigation.navigate("Menu")}
+					label={"S'authentifier"}
+					onPress={() =>
+						navigation.navigate("ScanQRCode", {
+							typeAction: "Profile",
+						})
+					}
+				/>
+				<Button
+					label={"Spots près de chez vous"}
+					onPress={() => navigation.navigate("Map")}
 				/>
 			</View>
 		</SafeAreaView>
@@ -50,19 +63,14 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-	// containerHomePage: {
-	// 	backgroundColor: "#505433",
-	// 	flex: 1,
-	// 	marginTop: 30,
-	// 	// position: "relative",
-	// },
-	ViewContainer: {
-		backgroundColor: "#505433",
+	container: {
+		// backgroundColor: "#505433",
 		flex: 1,
+		marginTop: 300,
+		// position: "relative",
 	},
-	ViewButton: {
-		// width: 400,
-		backgroundColor: "#E4C89D",
-		borderRadius: 10,
+	viewButton: {
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });

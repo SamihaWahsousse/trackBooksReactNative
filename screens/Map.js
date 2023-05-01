@@ -21,7 +21,7 @@ const logoSpot = require("../assets/images/logo-boite-livre.png");
 export default function Map() {
 	//fetch data
 	const urlLocalTunnel =
-		"https://true-planets-fail-90-112-199-68.loca.lt";
+		"https://new-streets-sleep-90-112-199-68.loca.lt";
 	// const urlApi = urlLocalTunnel + "/api/v1/books";
 	const [spot, setSpot] = useState([]);
 

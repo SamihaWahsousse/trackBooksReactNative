@@ -1,16 +1,3 @@
-// import { View, Text } from "react-native";
-// import React from "react";
-// import ScanCard from "../components/ScanCard";
-
-// export default function ScanSpotBooks() {
-// 	return (
-// 		<View>
-// 			<Text>ScanSpotBooks</Text>
-// 			<ScanCard />
-// 		</View>
-// 	);
-// }
-
 import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -38,7 +25,7 @@ export default function ScanSpotBooks({ navigation, route }) {
 		setScanned(true);
 		// alert(`${data} has been scanned!`);
 
-		navigation.navigate("SpotBooksInformation", {
+		navigation.navigate("SpotInformation", {
 			qrSpotData: data,
 		});
 	};

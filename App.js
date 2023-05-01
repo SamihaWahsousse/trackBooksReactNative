@@ -2,21 +2,25 @@ import { StyleSheet } from "react-native";
 import { TailwindProvider } from "tailwindcss-react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./screens/HomeScreen";
-import Menu from "./screens/Menu.js";
-import ScanCard from "./components/ScanCard";
-import BorrowReturnAction from "./screens/BorrowReturnAction";
+import "react-native-gesture-handler";
+import OnboardingScreen from "./screens/OnboardingScreen";
+import HomeScreen from "./screens/HomeScreen.js";
+import ScanQRCode from "./components/ScanQRCode";
+// import BorrowReturnAction from "./screens/BorrowReturnAction";
 import ListBooks from "./screens/ListBooks";
-import WelcomePage from "./screens/WelcomePage";
+import Profile from "./screens/Profile";
 import { useState } from "react";
-// import { AuthContext } from "./context/AuthContext";
-import TestqrCode from "./screens/TestqrCode";
+// import TestqrCode from "./screens/TestqrCode";
 import ScanSpotBooks from "./screens/ScanSpotBooks";
-import SpotBooksInformation from "./screens/SpotBooksInformation";
+import SpotInformation from "./screens/SpotInformation";
 import BookInformation from "./screens/BookInformation";
 import { AuthContext } from "./AuthContext";
 import Map from "./screens/Map";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 const Stack = createNativeStackNavigator();
+const tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 	const [user, setUser] = useState(null);
@@ -24,27 +28,29 @@ export default function App() {
 		<AuthContext.Provider value={{ user, setUser }}>
 			<TailwindProvider>
 				<NavigationContainer>
-					<Stack.Navigator>
-						<Stack.Screen name="Home" component={HomeScreen} />
-						<Stack.Screen name="Menu" component={Menu} />
-						<Stack.Screen name="ScanCard" component={ScanCard} />
-						<Stack.Screen
-							name="BorrowReturnAction"
-							component={BorrowReturnAction}
-						/>
+					<Stack.Navigator
+						screenOptions={{
+							headerStyle: {
+								backgroundColor: "#009387",
+							},
+							headerTintColor: "#fff",
+							headerTitleStyle: {
+								fontWeight: "bold",
+							},
+						}}
+					>
+						<Stack.Screen name="Home" component={OnboardingScreen} />
+						<Stack.Screen name="HomeScreen" component={HomeScreen} />
+						<Stack.Screen name="ScanQRCode" component={ScanQRCode} />
 						<Stack.Screen name="ListBooks" component={ListBooks} />
-						<Stack.Screen
-							name="WelcomePage"
-							component={WelcomePage}
-						/>
-						<Stack.Screen name="TestqrCode" component={TestqrCode} />
+						<Stack.Screen name="Profile" component={Profile} />
 						<Stack.Screen
 							name="ScanSpotBooks"
 							component={ScanSpotBooks}
 						/>
 						<Stack.Screen
-							name="SpotBooksInformation"
-							component={SpotBooksInformation}
+							name="SpotInformation"
+							component={SpotInformation}
 						/>
 						<Stack.Screen
 							name="BookInformation"
