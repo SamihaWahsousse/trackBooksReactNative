@@ -71,7 +71,7 @@ export default function ScanQRCode({ navigation, route }) {
 
 			{scanned && (
 				<Button
-					label={"Tap to Scan Again"}
+					label={"Appuyez pour scanner à nouveau"}
 					onPress={() => setScanned(false)}
 				/>
 			)}
@@ -81,18 +81,17 @@ export default function ScanQRCode({ navigation, route }) {
 
 const styles = StyleSheet.create({
 	containerSecondPage: {
-		backgroundColor: "#505433",
+		backgroundColor: "#AE806A",
 		flex: 1,
-		marginTop: 30,
+		// marginTop: 30,
 		position: "relative",
 	},
 	barCodeBox: {
 		alignItems: "center",
 		justifyContent: "center",
-		height: 300,
-		width: 300,
+		height: 200,
+		width: 200,
 		overflow: "hidden",
 		borderRadius: 30,
-		backgroundColor: "tomato",
 	},
 });

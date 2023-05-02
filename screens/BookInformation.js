@@ -4,6 +4,7 @@ import {
 	TouchableOpacity,
 	Modal,
 	StyleSheet,
+	Image,
 } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
@@ -26,7 +27,7 @@ export default function BookInformation({ route }) {
 	};
 
 	const urlLocalTunnel =
-		"https://new-streets-sleep-90-112-199-68.loca.lt";
+		"https://true-pillows-smile-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
 
@@ -36,6 +37,7 @@ export default function BookInformation({ route }) {
 			const response = await fetch(urlApi);
 			const data = await response.json();
 			setbook(data);
+			console.log(data);
 			if (data) {
 				userChoice === "buttonBorrow"
 					? borrowBook(data)
@@ -112,6 +114,8 @@ export default function BookInformation({ route }) {
 			console.error(error);
 		}
 	}
+	const uriBase =
+		"https://raw.githubusercontent.com/SamihaWahsousse/Trackbook-api-images/master/images/couvertureLivre/";
 
 	return (
 		<View>
@@ -124,64 +128,25 @@ export default function BookInformation({ route }) {
 				<ModalActionBook
 					changeModalVisible={changeModalVisible}
 					setData={setData}
-					test={message}
+					returnedMessage={message}
+					returnedBookInformation={book.title}
 				/>
 			</Modal>
+			<View>
+				<Text>welcome {user.name}</Text>
+				<Text>spotBooks N°:{SpotInformation.id}</Text>
+				<Text>book title :{book.title}</Text>
+				<View>
+					<Image
+						style={styles.imageContainer}
+						source={{
+							uri: uriBase + book?.cover,
+						}}
+					/>
+					<Text>Résumé du livre : {book.summary}</Text>
+				</View>
+			</View>
 		</View>
-
-		// <View>
-		// 	<Text>welcome {user.name}</Text>
-		// 	<Text>spotBooks N°:{SpotInformation.id}</Text>
-		// 	<Text>Vous avez scanné le livre :{book.title}</Text>
-		// 	<View>
-		// 		<Text> Que voulez vous faire ? </Text>
-		// 	</View>
-		// 	<TouchableOpacity
-		// 		style={styles.buttonModal}
-		// 		onPress={() => {
-		// 			borrowBook();
-		// 		}}
-		// 	>
-		// 		<Text style={styles.text}>Emprunter livre</Text>
-		// 	</TouchableOpacity>
-		// {/* userChoice === "buttonBorrow"
-		// 	? borrowBook()
-		// 	: userChoice === "buttonReturn"
-		// 	? returnBook()
-		// 	: null */}
-
-		// 	{/* <TouchableOpacity
-		// 		style={styles.buttonModal}
-		// 		onPress={() => {
-		// 			borrowBook();
-		// 		}}
-		// 	>
-		// 		<Text style={styles.text}>Emprunter livre</Text>
-		// 	</TouchableOpacity>
-
-		// 	<TouchableOpacity
-		// 		style={styles.buttonModal}
-		// 		onPress={() => {
-		// 			returnBook();
-		// 		}}
-		// 	>
-		// 		<Text style={styles.text}>Déposer livre</Text>
-		// 	</TouchableOpacity> */}
-
-		// <Modal
-		// 	transparent={true}
-		// 	animationStyle="slide"
-		// 	visible={isModalVisible}
-		// 	nRequestClose={() => changeModalVisible(false)}
-		// >
-		// 	{/* <Text>{message}</Text> */}
-		// 	<ModalActionBook
-		// 		changeModalVisible={changeModalVisible}
-		// 		setData={setData}
-		// 		test={message}
-		// 	/>
-		// </Modal>
-		// </View>
 	);
 }
 
@@ -198,5 +163,12 @@ const styles = StyleSheet.create({
 	},
 	buttonModal: {
 		width: "25%",
+	},
+	imageContainer: {
+		width: 200,
+		height: 300,
+		justifyContent: "center",
+		alignItems: "center",
+		// borderRadius: 50,
 	},
 });

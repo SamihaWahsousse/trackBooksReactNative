@@ -28,10 +28,10 @@ const ModalActionBook = (props) => {
 		<TouchableOpacity disabled={true} style={styles.container}>
 			<View style={styles.modal}>
 				<View style={styles.textView}>
-					<Text style={[styles.text, { fontSize: 20 }]}>
-						{props.test}
+					<Text style={[styles.text, { fontSize: 18 }]}>
+						Le livre : {props.returnedBookInformation}
 					</Text>
-					<Text style={styles.text}>{props.test}</Text>
+					<Text style={styles.text}>{props.returnedMessage}</Text>
 				</View>
 
 				<View style={styles.buttonView}>
@@ -39,7 +39,7 @@ const ModalActionBook = (props) => {
 						style={styles.touchableOpacity}
 						onPress={() => closeModal(false, "Cancel")}
 					>
-						<Text style={[styles.text, { color: "blue" }]}>
+						<Text style={[styles.text, { color: "#9b4922" }]}>
 							Cancel
 						</Text>
 					</TouchableOpacity>
@@ -47,7 +47,9 @@ const ModalActionBook = (props) => {
 						style={styles.touchableOpacity}
 						onPress={() => closeModal(false, "Ok")}
 					>
-						<Text style={[styles.text, { color: "blue" }]}>Ok</Text>
+						<Text style={[styles.text, { color: "#9b4922" }]}>
+							Ok
+						</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -60,13 +62,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#505433",
+		backgroundColor: "#825144",
 	},
 	modal: {
 		paddingTop: 10,
 		height: HEIGHT_MODAL,
 		backgroundColor: "white",
-		width: WIDTH - 60,
+		width: WIDTH - 40,
 		borderRadius: 10,
 	},
 	text: {

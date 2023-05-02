@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, Text, Image, StyleSheet } from "react-native";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import Button from "../components/Button";
 
@@ -13,7 +13,7 @@ export default function Profile({ route, navigation }) {
 	};
 	const { qrData } = route.params;
 	const urlLocalTunnel =
-		"https://new-streets-sleep-90-112-199-68.loca.lt";
+		"https://true-pillows-smile-90-112-199-68.loca.lt";
 
 	const getProfile = async () => {
 		try {
@@ -32,26 +32,79 @@ export default function Profile({ route, navigation }) {
 			);
 			const data = await response.json();
 			setUser(data);
-			console.log(user);
+			//alert(data.avatar);
 		} catch (error) {
 			console.error(error);
 		}
 	};
-
+	console.log(user);
+	//const userAvatar = JSON.stringify(user.avatar);
+	//alert("emm " + userAvatar);
 	useEffect(() => {
 		getProfile();
 	}, []);
-	return (
-		<View style={{ flex: 1 }}>
-			<Text>Page Profile</Text>
-			{user ? (
-				<Text>Welcome {user.name}</Text>
-			) : (
-				<Text>Veuillez vous connecter</Text>
-			)}
+	const uriBase =
+		"https://raw.githubusercontent.com/SamihaWahsousse/Trackbook-api-images/master/images/avatars/";
 
-			<Button label={"scan spotBooks"} onPress={ScanSpotBooks} />
-			<Button label="Go back" onPress={() => navigation.goBack()} />
+	// alert(uri);
+	//"C:/Projet%20mobile/trackBooks-application/assets/avatars/avatarHomme.jpg";
+	return (
+		<View style={styles.mainContainer}>
+			<View style={styles.userInformationContainer}>
+				{user ? (
+					<Text style={styles.textInformationUser}>
+						Bienvenue {user.name}
+					</Text>
+				) : (
+					<Text style={styles.textInformationUser}>
+						Veuillez vous connecter !
+					</Text>
+				)}
+				<View>
+					<Image
+						style={styles.imageContainer}
+						source={{
+							uri: uriBase + user?.avatar,
+						}}
+					/>
+				</View>
+				<Text style={[styles.textInformationUser, { fontSize: 18 }]}>
+					Veuillez Scanner le QR code du Spot Books
+				</Text>
+				<Button
+					label={"Scannez spot Books"}
+					onPress={ScanSpotBooks}
+				/>
+				<Button
+					label="Page précédente"
+					onPress={() => navigation.goBack()}
+				/>
+			</View>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	imageContainer: {
+		width: 150,
+		height: 150,
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: 100,
+	},
+	mainContainer: {
+		flex: 1,
+	},
+	userInformationContainer: {
+		width: "100%",
+		height: "100%",
+		alignItems: "center",
+		marginTop: 50,
+	},
+	textInformationUser: {
+		fontSize: 30,
+		padding: 20,
+		color: "#825144",
+		fontWeight: "bold",
+	},
+});
