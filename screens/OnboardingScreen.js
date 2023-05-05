@@ -21,28 +21,6 @@ const OnboardingScreen = ({ navigation }) => {
 		});
 	}, []);
 	return (
-		// 	<SafeAreaView
-		// 		style={styles.ViewContainer}
-		// 		className=" items-center justify-center w-200 h-200 bg-slate-500"
-		// 	>
-		// 		<Image source={PlaceholderImage} className="w-80 h-80" />
-		// 		<Text>TrackBook Application </Text>
-		// 		<View>
-		// 			<Text>
-		// 				Emprunter et déposer des livres dans un spot livres d'une
-		// 				façon simple et fluide.
-		// 			</Text>
-		// 		</View>
-
-		// 		<View style={styles.ViewButton}>
-		// 			{/* Second section*/}
-		// 			<Button
-		// 				label={"Get Started"}
-		// 				onPress={() => navigation.navigate("HomeScreen")}
-		// 			/>
-		// 		</View>
-		// 	</SafeAreaView>
-		// );
 		<SafeAreaView style={styles.Container}>
 			<View style={styles.ViewContainer}>
 				<Onboarding

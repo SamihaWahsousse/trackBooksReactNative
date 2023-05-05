@@ -44,7 +44,7 @@ export default function App() {
 							}}
 						>
 							<Stack.Screen
-								name="Home"
+								name="OnboardingScreen"
 								component={OnboardingScreen}
 							/>
 							<Stack.Screen

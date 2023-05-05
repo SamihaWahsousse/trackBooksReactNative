@@ -1,16 +1,11 @@
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	Modal,
-	StyleSheet,
-	Image,
-} from "react-native";
+import { View, Text, Modal, StyleSheet, Image } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import ModalActionBook from "../components/ModalActionBook";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Button from "../components/Button";
 
-export default function BookInformation({ route }) {
+export default function BookInformation({ route, navigation }) {
 	const { user } = useContext(AuthContext);
 	const { SpotInformation } = route.params;
 	const { userChoice } = route.params;
@@ -27,7 +22,7 @@ export default function BookInformation({ route }) {
 	};
 
 	const urlLocalTunnel =
-		"https://true-pillows-smile-90-112-199-68.loca.lt";
+		"https://fair-eggs-warn-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/books/" + qrData;
 
@@ -90,6 +85,7 @@ export default function BookInformation({ route }) {
 	//return book function
 	async function returnBook(updatedBook) {
 		try {
+			console.log("updatedBook " + updatedBook.id);
 			const response = await fetch(
 				urlLocalTunnel +
 					"/api/v1/books/" +
@@ -107,7 +103,7 @@ export default function BookInformation({ route }) {
 				}
 			);
 			const returnData = await response.json();
-			console.log(returnData.Message);
+			console.log("message " + returnData.Message);
 			setMessage(returnData.Message);
 			changeModalVisible(true);
 		} catch (error) {
@@ -118,7 +114,7 @@ export default function BookInformation({ route }) {
 		"https://raw.githubusercontent.com/SamihaWahsousse/Trackbook-api-images/master/images/couvertureLivre/";
 
 	return (
-		<View>
+		<View style={styles.maincontainer}>
 			<Modal
 				transparent={true}
 				animationStyle="slide"
@@ -133,34 +129,67 @@ export default function BookInformation({ route }) {
 				/>
 			</Modal>
 			<View>
-				<Text>welcome {user.name}</Text>
-				<Text>spotBooks N°:{SpotInformation.id}</Text>
-				<Text>book title :{book.title}</Text>
 				<View>
-					<Image
-						style={styles.imageContainer}
-						source={{
-							uri: uriBase + book?.cover,
-						}}
-					/>
-					<Text>Résumé du livre : {book.summary}</Text>
+					<Text>
+						<AntDesign
+							name="user"
+							style={{
+								color: "#4F2916",
+								fontSize: 18,
+								fontWeight: "bold",
+							}}
+						/>
+						{user.name}
+					</Text>
 				</View>
+				<Text style={{ fontSize: 16, marginLeft: "10%" }}>
+					spot Books : {SpotInformation.street},{SpotInformation.city}
+				</Text>
+				<View>
+					<View style={{ height: 500 }}>
+						<Text
+							style={{
+								fontSize: 16,
+								marginLeft: "20%",
+								margin: 10,
+							}}
+						>
+							Titre : {book.title}
+						</Text>
+						<View style={{ alignItems: "center" }}>
+							<Image
+								style={styles.imageContainer}
+								source={{
+									uri: uriBase + book?.cover,
+								}}
+							/>
+						</View>
+						<View>
+							<Text style={{ fontSize: 16, alignItems: "center" }}>
+								Résumé : {book.summary}
+							</Text>
+						</View>
+					</View>
+				</View>
+			</View>
+			<View style={{ margin: 40 }}>
+				<Button
+					label={"Quitter"}
+					onPress={() => navigation.navigate("OnboardingScreen")}
+				/>
 			</View>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
+	maincontainer: {
 		flex: 1,
 		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "#ecf0f1",
-		marginTop: 30,
+		justifyContent: "flex-start",
+		backgroundColor: "#AE806A",
 	},
-	text: {
-		backgroundColor: "orange",
-	},
+
 	buttonModal: {
 		width: "25%",
 	},
@@ -169,6 +198,7 @@ const styles = StyleSheet.create({
 		height: 300,
 		justifyContent: "center",
 		alignItems: "center",
-		// borderRadius: 50,
+		borderRadius: 20,
+		margin: 10,
 	},
 });

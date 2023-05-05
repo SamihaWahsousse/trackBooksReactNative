@@ -21,7 +21,7 @@ const logoSpot = require("../assets/images/logo-boite-livre.png");
 export default function Map() {
 	//fetch data
 	const urlLocalTunnel =
-		"https://new-streets-sleep-90-112-199-68.loca.lt";
+		"https://fair-eggs-warn-90-112-199-68.loca.lt";
 	// const urlApi = urlLocalTunnel + "/api/v1/books";
 	const [spot, setSpot] = useState([]);
 
@@ -41,35 +41,15 @@ export default function Map() {
 				<Marker
 					key={index}
 					coordinate={{
-						//latitude: 45.15348777096939,
 						latitude: parseFloat(item.goelocalisation["1"]),
-						longitude: parseFloat(item.goelocalisation["2"]), //5.744055882096291,
-						//longitude: 5.744055882096291,
+						longitude: parseFloat(item.goelocalisation["2"]),
 					}}
 					title={item.street}
 				/>
 			);
 		});
 	};
-	// console.log(item.goelocalisation[1]);
-	// 		const latitude = parseFloat(item.goelocalisation[1]);
-	// 		const longitude = parseFloat(item.goelocalisation[0]);
-	// 		if (isNaN(latitude) || isNaN(longitude)) {
-	// 			// Skip this spot if the coordinates are invalid
-	// 			return null;
-	// 		}
-	// 		return (
-	// 			<Marker
-	// 				key={index}
-	// 				coordinate={{
-	// 					latitude: latitude,
-	// 					longitude: longitude,
-	// 				}}
-	// 				title={item.street}
-	// 			/>
-	// 		);
-	// 	});
-	// };
+
 	const [region, setRegion] = useState({
 		latitude: 45.166672,
 		longitude: 5.71667,
@@ -82,12 +62,7 @@ export default function Map() {
 
 	return (
 		<View style={styles.container}>
-			{/* <Text>hello la liste des spotBooks</Text>
-
-			{spot.map((item, index) => (
-				<Text>{item.street}</Text>
-			))} */}
-			{/* // Render our MapView */}
+			{/* // Render our MapView  */}
 			<MapView
 				style={styles.map}
 				onRegionChange={onRegionChange}

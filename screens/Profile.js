@@ -13,7 +13,7 @@ export default function Profile({ route, navigation }) {
 	};
 	const { qrData } = route.params;
 	const urlLocalTunnel =
-		"https://true-pillows-smile-90-112-199-68.loca.lt";
+		"https://fair-eggs-warn-90-112-199-68.loca.lt";
 
 	const getProfile = async () => {
 		try {

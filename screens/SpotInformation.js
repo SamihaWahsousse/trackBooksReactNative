@@ -2,8 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import Button from "../components/Button";
-import { useNavigation } from "@react-navigation/native";
-import ScanQRCode from "../components/ScanQRCode";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default function SpotInformation({ route, navigation }) {
 	const { user } = useContext(AuthContext);
@@ -11,7 +10,7 @@ export default function SpotInformation({ route, navigation }) {
 	const { qrData } = route.params;
 
 	const urlLocalTunnel =
-		"https://true-pillows-smile-90-112-199-68.loca.lt";
+		"https://fair-eggs-warn-90-112-199-68.loca.lt";
 
 	const urlApi = urlLocalTunnel + "/api/v1/spotbooks/" + qrData;
 	//test
@@ -32,30 +31,57 @@ export default function SpotInformation({ route, navigation }) {
 
 	return (
 		<View style={styles.mainContainer}>
-			{/* <Text>Bienvenue sur la page spot Books </Text> */}
 			{user ? (
 				<View
 					style={{
-						backgroundColor: "green",
 						justifyContent: "center",
+						width: "95%",
+						alignItems: "center",
+						flexDirection: "row",
+						justifyContent: "flex-end",
+						height: 35,
 					}}
 				>
-					<Text>Utilisateur connecté : {user.name}</Text>
+					<Text>
+						<AntDesign
+							name="user"
+							style={{
+								color: "#4F2916",
+								fontSize: 18,
+								fontWeight: "bold",
+							}}
+						/>
+					</Text>
+					<Text
+						style={{
+							fontSize: 18,
+							fontWeight: "bold",
+							color: "#4F2916",
+						}}
+					>
+						{user.name}
+					</Text>
 				</View>
 			) : (
-				<Text>Veuillez vous connecter ! </Text>
+				<Text>Veuillez vous connecter !</Text>
 			)}
 
-			{/* {data.role === "admin" ? (
-				<Text>welcome admin </Text>
-			) : (
-				<Text>Welcome guest</Text>
-			)} */}
 			<Text style={styles.textInformationSpot}>
 				Vous êtes sur le Spot Books :{"\n"}
 			</Text>
-			<View style={{ backgroundColor: "red" }}>
-				<Text>
+			<View
+				style={{
+					backgroundColor: "#825144",
+					width: "90%",
+					alignItems: "center",
+					borderRadius: 5,
+					marginLeft: 15,
+					height: "10%",
+					justifyContent: "center",
+					marginTop: "5%",
+				}}
+			>
+				<Text style={{ color: "white" }}>
 					N° : {spotBooks.id}
 					{"\n"}
 					Adress : {spotBooks.street}, {spotBooks.zipcode}
@@ -63,7 +89,7 @@ export default function SpotInformation({ route, navigation }) {
 			</View>
 
 			<View style={styles.viewButton}>
-				<Text style={{ fontSize: 20 }}>
+				<Text style={{ fontSize: 20, color: "#4F2916" }}>
 					Veuillez choisir une action:
 				</Text>
 				<Button
@@ -88,7 +114,7 @@ export default function SpotInformation({ route, navigation }) {
 				/>
 
 				<Button
-					label="Page précedente"
+					label="Page précédente"
 					onPress={() => navigation.goBack()}
 				/>
 			</View>
@@ -106,25 +132,22 @@ const styles = StyleSheet.create({
 	},
 	mainContainer: {
 		flex: 1,
-		backgroundColor: "pink",
+		backgroundColor: "#AE806A",
 	},
-	userInformationContainer: {
-		width: "100%",
-		height: "100%",
-		alignItems: "center",
-		marginTop: 50,
-	},
+
 	textInformationSpot: {
-		fontSize: 20,
-		padding: 20,
-		color: "#825144",
-		fontWeight: "bold",
+		fontSize: 23,
+		marginLeft: 50,
+		color: "white",
+		alignContent: "center",
+		height: 40,
+		marginTop: 30,
 	},
 	viewButton: {
-		// borderBottomColor: "#fff",
 		margin: 30,
 		padding: 30,
 		justifyContent: "center",
 		alignItems: "center",
+		marginTop: "10%",
 	},
 });
