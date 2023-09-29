@@ -13,7 +13,7 @@ export default function Profile({ route, navigation }) {
 	};
 	const { qrData } = route.params;
 	const urlLocalTunnel =
-		"https://fair-eggs-warn-90-112-199-68.loca.lt";
+		"https://6675-2a01-cb15-8280-1a00-29be-42ec-4e2b-ade3.ngrok-free.app";
 
 	const getProfile = async () => {
 		try {
